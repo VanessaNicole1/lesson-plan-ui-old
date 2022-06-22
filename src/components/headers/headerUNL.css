@@ -1,0 +1,22 @@
+.containerHeaderUNL{
+    display: flex;
+    padding: 3%;
+    background-color: #fff;
+    height: 84px;
+    margin-bottom: 50px;
+    align-items: center;
+}
+.imgLogoUNL{
+    height: 120px;
+    margin-left: 25%;
+}
+
+.imgLogoCIS{
+    height: 150px;
+    width: 190px;
+}
+
+h1{
+    font-size: 35px;
+    padding: 21px 21px;
+}

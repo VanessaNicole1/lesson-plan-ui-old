@@ -1,0 +1,17 @@
+.paragraphTI {
+  padding: 0px 30px;
+  text-align: justify;
+  color: gray;
+}
+
+.buttonTI {
+  margin-left: 48vw;
+  margin-top: 2vw;
+}
+.divTeachInt {
+  border-radius: 40px;
+  background: white;
+  width: 50vw;
+  margin-left: 25vw;
+  height: 25vw;
+}
