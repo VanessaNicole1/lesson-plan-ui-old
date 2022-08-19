@@ -1,13 +1,13 @@
-import React from 'react'
 import { Button, Input } from '@mui/material'
+import React from 'react'
 import { TableIC } from './tableIC'
 
-export const Teacher = () => {
+export const Subject = () => {
   return (
     <>
     <div>
-        <h1> Listado Docentes </h1>
-        <p>Subir el litado de los docentes en formato .xlsx de la siguiente manera: </p>
+        <h1> Listado de Materias </h1>
+        <p>Subir el litado de las materias en formato .csv de la siguiente manera: </p>
         <p> dato1, dato2, dato 3</p>
         <p>Ejemplo:</p>
         <p>dato1,dato2,dato3</p>
@@ -15,7 +15,7 @@ export const Teacher = () => {
         <p>
 
         </p>
-        <p> Archivo excel CHD</p>
+        <p> Archivo excel</p>
         
     </div>
     <div className='scheduleUploadFile'>

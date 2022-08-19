@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -24,12 +22,103 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Plan de Clases</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>Plan de Clases</title>
+  <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+  <script>
+    let array = new Array();
+    let mat = "";
+    let sub = "";
+    $(function () {
+      $('.left .item').draggable({
+        revert: true,
+        proxy: 'clone'
+      });
+      $('.right td.drop').droppable({
+        onDragEnter: function () {
+          $(this).addClass('over');
+
+        },
+        onDragLeave: function () {
+          $(this).removeClass('over');
+        },
+        onDrop: function (e, source) {
+          sub = source.textContent;
+          $(this).removeClass('over');
+          mat = this.id;
+          array.push({
+            materia: sub,
+            matriz: mat
+          });
+          let pos = array.indexOf(sub)
+          if ($(source).hasClass('assigned')) {
+            sub = source.textContent;
+            $(this).append(source);
+            mat = this.id;
+            array.pop()
+            array.pop()
+            array.push({
+              materia: sub,
+              matriz: mat
+            });
+          } else {
+            let c = $(source).clone().addClass('assigned');
+            $(this).empty().append(c);
+            
+            c.draggable({
+              revert: true
+            });
+
+          }
+
+        }
+      });
+    });
+    $(document).ready(function () {
+      const boton = document.getElementById("saveS")
+      
+      //boton.onclick = getFullData;
+
+      $("#saveS").click(function () {
+        array.map(getFullData);
+        function getFullData(item) {
+          crearJson(item.matriz, item.materia)
+        }
+      });
+    });
+
+  </script>
+
+  <script>
+    let jsonObject = new Array();
+    let horas= ["7:30","8:30","9:30","10:30","11:30","12:30","13:30","14:30"]
+    let dias=["Lunes","Martes","Mircoles","Jueves","Viernes"]
+    function crearJson(id , materia) {
+      for (let i = 1; i <= 8; i++) {
+        for (let j = 1; j < 6; j++) {
+          if (id[2] == `${i}` && id[3] == `${j}`) {
+            jsonObject.push({
+              hour:horas[i-1],
+              day: dias[j-1],
+              subject: materia
+            })
+          } 
+        }
+      }
+   
+    let jsonString = JSON.stringify(jsonObject); //convertirmos el array de objetos a un string con formato json
+    
+    }
+
+
+  </script>
+
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -39,5 +128,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

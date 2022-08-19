@@ -1,14 +1,13 @@
-import { Button, Input } from '@mui/material'
-
 import React from 'react'
+import { Button, Input } from '@mui/material'
 import { TableIC } from './tableIC'
 
-export const Schedule = () => {
+export const Teacher = () => {
   return (
     <>
     <div>
-        <h1> Carga Horaria de los Docentes (CHD)</h1>
-        <p>Subir la carga horaria de los docentes en formato .xlsx de la siguiente manera: </p>
+        <h1> Listado Docentes </h1>
+        <p>Subir el litado de los docentes en formato .csv de la siguiente manera: </p>
         <p> dato1, dato2, dato 3</p>
         <p>Ejemplo:</p>
         <p>dato1,dato2,dato3</p>
