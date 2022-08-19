@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, TextField, InputAdornment } from "@material-ui/core";
 
-import { Chip, Divider, Paper, InputLabel, Avatar, Stack } from "@mui/material";
+import { Chip, Divider, Paper, InputLabel, Avatar, Stack, Typography } from "@mui/material";
 //import { useToasts } from "react-toast-notifications";
 //import { makeStyles } from "@mui/styles";
 import { Box, Button } from "@mui/material";
@@ -49,16 +49,6 @@ export const ClasSPlan = ({ change }) => {
 
   return (
     <Box
-      sm={9}
-      md={6}
-      component={Paper}
-      elevation={6}
-      sx={{
-        minheight: "80vh",
-        marginX: "40vh",
-        marginY: "5vh",
-        backgroundColor: "white",
-      }}
     >
       <form
         name="formClass"
@@ -66,15 +56,12 @@ export const ClasSPlan = ({ change }) => {
         noValidate
         onSubmit={handleSubmit}
       >
-        <Divider
-          sx={{
-            marginTop: "2vh",
-          }}
-        >
-          <Chip color="primary" label="DATOS INFORMATIVOS" />
-        </Divider>
+        
+        
         <Box m={5}>
-          <Grid container spacing={2} xs={12} component="main" sx={{}}>
+        <Typography variant="h6" gutterBottom>Datos Informativos</Typography>
+          <Grid container spacing={2} xs={12} component="main" >
+          
             <Grid item xs={6}>
               <TextField
                 sx={{
@@ -139,7 +126,7 @@ export const ClasSPlan = ({ change }) => {
                 }}
               />
             </Grid>
-            <Grid item>
+            <Grid item xs={6}>
               <TextField
                 margin="normal"
                 name="teacher"
@@ -160,14 +147,14 @@ export const ClasSPlan = ({ change }) => {
             </Grid>
 
             
-            <Grid item xs={8}>
-            <center>
+            <Grid item xs={10}>
+            
               <TextField
                 margin="normal"
                 fullWidth
                 name="theme"
                 variant="outlined"
-                label="Ingrese lfoa Tematica a tratar"
+                label="Ingrese la Tematica a tratar"
                 value={values.theme}
                 onChange={handleInputChange}
                 InputProps={{
@@ -180,18 +167,17 @@ export const ClasSPlan = ({ change }) => {
                   ),
                 }}
               />
-              </center>
             </Grid>
             
 
             
           </Grid>
 
-          <Divider>
-            <Chip color="primary" label="CONTENIDO" />
-          </Divider>
-          <center>
-          <Grid item xs={8}>
+          <Typography variant="h6" gutterBottom>Contenido</Typography>
+           
+          
+          
+          <Grid item xs={10}>
             <TextField
               fullWidth
               multiline
@@ -214,11 +200,8 @@ export const ClasSPlan = ({ change }) => {
             />
           </Grid>
 
-          <Grid item xs={8}>
-            <Divider>
-              {" "}
+          <Grid item xs={10}>
               <Chip color="primary" label="Recurso" />
-            </Divider>
             <TextField
               fullWidth
               margin="normal"
@@ -238,11 +221,9 @@ export const ClasSPlan = ({ change }) => {
             />
           </Grid>
 
-          <Divider>
-            <Chip color="primary" label="OBSERVACIONES" />
-          </Divider>
+          <Typography variant="h6" gutterBottom>Observaciones</Typography>
 
-          <Grid container item xs={8}>
+          <Grid container item xs={10}>
             <TextField
               fullWidth
               multiline
@@ -264,7 +245,7 @@ export const ClasSPlan = ({ change }) => {
               }}
             />
           </Grid>
-          </center>
+        
           
           
           

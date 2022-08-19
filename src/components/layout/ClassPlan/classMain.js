@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { HeaderUNL } from "../../headers/headerUNL";
@@ -12,15 +12,7 @@ export const ClassMain = () => {
         <HeaderUNL></HeaderUNL>
       </Grid>
 
-      <Grid container justifyContent="center" sx={{
-        marginY:"3vh"
-      }}>
-        <Button variant="contained"
-        onClick={() => navigate('/teacher/classPlan')}
-        >Nuevo Plan</Button>
-      </Grid>
-
-      <Grid container rowSpacing={2} justifyContent="center">
+      <Grid container rowSpacing={2} justifyContent="center" sx={{marginY:"2%"}}>
         <TableClassPlan></TableClassPlan>
       </Grid>
       

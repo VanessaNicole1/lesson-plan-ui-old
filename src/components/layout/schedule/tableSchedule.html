@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="jquery,ui,easy,easyui,web">
+	<meta name="description" content="easyui help you build your web page easily!">
+	<title>PLAN DE CLASES</title>
+	<script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+	
+	<style type="text/css">
+		.left{
+			width:120px;
+			float:left;
+		}
+		.left table{
+			background:#E0ECFF;
+		}
+		.left td{
+			background:#eee;
+		}
+		.right{
+			float:right;
+			width:600px;
+		}
+		.right table{
+			background:#E0ECFF;
+			width:100%;
+		}
+		.right td{
+			background:#fafafa;
+			text-align:center;
+			padding:2px;
+		}
+		.right td{
+			background:#E0ECFF;
+		}
+		.right td.drop{
+			background:#fafafa;
+			width:100px;
+		}
+		.right td.over{
+			background:#FBEC88;
+		}
+		.item{
+			text-align:center;
+			border:1px solid #499B33;
+			background:#fafafa;
+			width:100px;
+		}
+		.assigned{
+			border:1px solid #BC2A4D;
+		}
+		
+	</style>
+	<script>
+		$(function(){
+			$('.left .item').draggable({
+				revert:true,
+				proxy:'clone'
+			});
+			$('.right td.drop').droppable({
+				onDragEnter:function(){
+					$(this).addClass('over');
+				},
+				onDragLeave:function(){
+					$(this).removeClass('over');
+				},
+				onDrop:function(e,source){
+					$(this).removeClass('over');
+					if ($(source).hasClass('assigned')){
+						$(this).append(source);
+					} else {
+						let c = $(source).clone().addClass('assigned');
+						$(this).empty().append(c);
+						c.draggable({
+							revert:true
+						});
+					}
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+<div style="width:750px;">
+	<div class="left">
+		<table>
+			<tr>
+				<td><div class="item">Compiladores</div></td>
+			</tr>
+			<tr>
+				<td><div class="item">Titulación</div></td>
+			</tr>
+			<tr>
+				<td><div class="item">Ingenieria de SW I</div></td>
+			</tr>
+			<tr>
+				<td><div class="item">Ingenieria de SW II</div></td>
+			</tr>
+			<tr>
+				<td><div class="item">Inteligencia Artificial</div></td>
+			</tr>
+			<tr>
+				<td><div class="item">Metodología de Investigación</div></td>
+			</tr>
+			<tr>
+				<td><div class="item">Etica</div></td>
+			</tr>
+			<tr>
+				<td><div class="item">Programación Avanzada</div></td>
+			</tr>
+		</table>
+	</div>
+	<div class="right">
+		<table>
+			<tr>
+				<td class="blank"></td>
+				<td class="title">Lunes</td>
+				<td class="title">Martes</td>
+				<td class="title">Miercoles</td>
+				<td class="title">Jueves</td>
+				<td class="title">Viernes</td>
+			</tr>
+			<tr>
+				<td class="time">7:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			<tr>
+				<td class="time">8:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			<tr>
+				<td class="time">9:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			<tr>
+				<td class="time">10:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			<tr>
+				<td class="time">11:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			<tr>
+				<td class="time">12:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			<tr>
+				<td class="time">13:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			<tr>
+				<td class="time">14:30</td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+				<td class="drop"></td>
+			</tr>
+			
+		</table>
+	</div>
+</div>
+</body>
+</html>

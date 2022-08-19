@@ -1,15 +1,9 @@
 .paragraphTI {
-  
   text-align: justify;
   color: gray;
 }
 
 
-.divTeachInt {
-  border-radius: 40px;
-  background: white;
-  width: 50vw;
-  height: max-content;
-  margin-left: 25vw;
-  height: 25vw;
+.root {
+  background-color: white;
 }

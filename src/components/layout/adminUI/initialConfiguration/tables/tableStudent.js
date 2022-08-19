@@ -40,9 +40,7 @@ const columns = [
 //4 - renderizamos la datatable
         return (
             <>
-            <Grid container>
-            <HeaderUNL></HeaderUNL> 
-            </Grid>
+            
             
             <MUIDataTable 
             title={"Tabla de Estudiantes"}
