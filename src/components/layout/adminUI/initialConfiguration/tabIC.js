@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { Teacher } from './teacher';
 import { Student } from './student';
 import { Subject } from './subject';
+import { GeneralData } from './generalData';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,20 +54,25 @@ export const TabIC = () => {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant="fullWidth">
-          <Tab label="Docentes" {...a11yProps(0)} />
-          <Tab label="Estudiantes" {...a11yProps(1)} />
-          <Tab label="Materias" {...a11yProps(2)} />
+        <Tab label="Datos Generales" {...a11yProps(0)} />
+          <Tab label="Docentes" {...a11yProps(1)} />
+          <Tab label="Estudiantes" {...a11yProps(2)} />
+          <Tab label="Materias" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Teacher></Teacher>
+        <GeneralData></GeneralData>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Student></Student>
+        <Teacher></Teacher>
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <Student></Student>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <Subject></Subject>
       </TabPanel>
+      
     </Box>
   );
 }

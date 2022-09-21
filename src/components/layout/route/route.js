@@ -12,7 +12,7 @@ import { InitialConfiguration } from "../adminUI/initialConfiguration/initialCon
 import { AdminPrincipal } from "../adminUI/adminPrincipal";
 import { TeacherTable } from "../adminUI/teacherTable";
 import { Scheduler } from "../schedule/scheduler";
-import { TableStudent } from "../adminUI/initialConfiguration/tables/tableStudent";
+
 
 
 
@@ -32,7 +32,6 @@ export const RoutesUI = () => {
 
           <Route path="/admin/confInit" element={<InitialConfiguration/>}/>
           <Route path="/admin/teachers" element={<TeacherTable/>}/>
-          <Route path="/admin/students" element={<TableStudent/>}/>
 
 
           <Route path="/admin" element={<AdminPrincipal/>}/>

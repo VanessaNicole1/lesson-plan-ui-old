@@ -17,9 +17,6 @@ import { ClasSPlan } from "./clasSPlan";
 
 export const TableClassPlan = () => {
   const [lgShow, setLgShow] = React.useState(false);
-  const [show, setShow] = React.useState(false);
-  const handleClose = () => setShow(false)
-  const handleOpen = () => setShow(true)
   
   function CustomToolbar() {
     return (

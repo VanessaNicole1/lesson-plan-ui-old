@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Button, Input } from "@mui/material";
-import { TableStudent } from "./tables/tableStudent";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Input } from "@mui/material";
+import { DataGrid , GridToolbarColumnsButton, GridToolbarContainer, GridToolbarDensitySelector, GridToolbarExport, GridToolbarFilterButton,} from "@mui/x-data-grid";
 
 export const Student = () => {
 
   const [selectFile, setSelectFile]=useState(null);
+  const [students, setStudent] = useState([]);
+  const URL = "http://localhost:3000/students";
  // let headers = new Headers();
 
   const uploadFile=(e)=>{
@@ -34,6 +36,52 @@ export const Student = () => {
 
   }
 
+  const columns = [
+    { field: "address", headerName: "Dirección", width: 225 },
+    { field: "name", headerName: "Nombre", width: 150 },
+    { field: "lastName", headerName: "Apellido", width: 150 },
+    { field: "email", headerName: "Correo", width: 225 },
+  ];
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <Box
+          //height="65px"
+          width="100%"
+          display="flex"
+          flexDirection="row"
+          justifyContent="left"
+        >
+          <Box
+            width="70%"
+            display="flex"
+            justifyContent="flex-start"
+            //alignItems="center"
+          >
+            <GridToolbarColumnsButton />
+            <GridToolbarFilterButton />
+            <GridToolbarDensitySelector />
+            <GridToolbarExport />
+          </Box>
+          </Box>
+      </GridToolbarContainer>
+    );
+  }
+  const requestOptionsGet = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  method: "GET",
+  redirect: "follow",
+};
+
+  useEffect(() => {
+    fetch(URL, requestOptionsGet)
+      .then((response) => response.json())
+      .then((json) => setStudent(json));
+  }, []);
+  console.log("STUDENTS:",students)
 
   return (
     <>
@@ -63,9 +111,19 @@ export const Student = () => {
         </Button>
       </div>
 
-      <div className="tableSchedule">
+      <div style={{ height: 600, width: "55%" }}>
         <h1>Contenido del archivo</h1>
-          <TableStudent></TableStudent>
+        <DataGrid
+          rows={students}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection
+          components={{
+            Toolbar: CustomToolbar,
+          }
+          }
+        />
       </div>
     </>
   );
