@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Input } from "@mui/material";
-import { DataGrid , GridToolbarColumnsButton, GridToolbarContainer, GridToolbarDensitySelector, GridToolbarExport, GridToolbarFilterButton,} from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+} from "@mui/x-data-grid";
 
 export const Teacher = () => {
   const [selectFile, setSelectFile] = useState(null);
@@ -33,15 +40,14 @@ export const Teacher = () => {
   };
 
   const requestOptionsGet = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
     method: "GET",
     redirect: "follow",
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 50 },
     { field: "identifier", headerName: "Identificador", width: 150 },
     { field: "name", headerName: "Nombre", width: 150 },
     { field: "lastName", headerName: "Apellido", width: 150 },
@@ -56,7 +62,10 @@ export const Teacher = () => {
           width="100%"
           display="flex"
           flexDirection="row"
-          justifyContent="left"
+          justifyContent="center"
+          flex="1"
+          //justifyContent = "center"
+          alignItems="center"
         >
           <Box
             width="70%"
@@ -69,7 +78,7 @@ export const Teacher = () => {
             <GridToolbarDensitySelector />
             <GridToolbarExport />
           </Box>
-          </Box>
+        </Box>
       </GridToolbarContainer>
     );
   }
@@ -79,54 +88,61 @@ export const Teacher = () => {
       .then((response) => response.json())
       .then((json) => setTeachers(json));
   }, []);
-  console.log("TEACHERS:",getTeachers)
+  console.log("TEACHERS:", getTeachers);
 
   return (
     <>
-      <div>
-        <h1> Listado Docentes </h1>
-        <p>
-          Subir el listado de los docentes en formato .csv de la siguiente
-          manera:{" "}
-        </p>
-        <p> cedula, nombre, apellido, correo</p>
-        <p>Ejemplo:</p>
-        <p>cedula, nombre, apellido, correo</p>
-        <p>110596450,Edison,Coronel,edison.cor@unl.edu.ec</p>
-        <p>110596451,Maria ,Ruilova,maria.rui@unl.edu.ec</p>
-        <p></p>
-        <p> Archivo excel CHD</p>
-      </div>
-      <div className="scheduleUploadFile">
-        <Input
-          id="contained-button-file"
-          multiple
-          type="file"
-          onChange={(e) => uploadFile(e.target.files)}
-        />
-        <Button
-          variant="contained"
-          component="span"
-          onClick={() => insertFile()}
-        >
-          Subir Archivo
-        </Button>
-      </div>
+      <center>
+        <div>
+          <h1> Listado Docentes </h1>
+          <p>
+            Subir el listado de los docentes en formato .csv de la siguiente
+            manera:{" "}
+          </p>
+          <p> cedula, nombre, apellido, correo</p>
+          <p>Ejemplo:</p>
+          <p>cedula, nombre, apellido, correo</p>
+          <p>110596450,Edison,Coronel,edison.cor@unl.edu.ec</p>
+          <p>110596451,Maria ,Ruilova,maria.rui@unl.edu.ec</p>
+          <p></p>
+          <p> Archivo excel CHD</p>
+        </div>
+        <div className="scheduleUploadFile">
+          <Input
+            id="contained-button-file"
+            multiple
+            type="file"
+            onChange={(e) => uploadFile(e.target.files)}
+          />
+          <Button
+            variant="contained"
+            component="span"
+            onClick={() => insertFile()}
+          >
+            Subir Archivo
+          </Button>
+        </div>
+        <div style={{ paddingTop: "3%" }}></div>
 
-      <div style={{ height: 600, width: "55%" }}>
-        <h1>Contenido del archivo</h1>
-        <DataGrid
-          rows={getTeachers}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection
-          components={{
-            Toolbar: CustomToolbar,
-          }
-          }
-        />
-      </div>
+        <div
+          style={{
+            height: 600,
+            width: "55%",
+          }}
+        >
+          <h1>Contenido del archivo</h1>
+          <DataGrid
+            rows={getTeachers}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            components={{
+              Toolbar: CustomToolbar,
+            }}
+          />
+        </div>
+      </center>
     </>
   );
 };
