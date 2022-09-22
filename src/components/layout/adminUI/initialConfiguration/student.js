@@ -1,40 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Input } from "@mui/material";
-import { DataGrid , GridToolbarColumnsButton, GridToolbarContainer, GridToolbarDensitySelector, GridToolbarExport, GridToolbarFilterButton,} from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+} from "@mui/x-data-grid";
 
 export const Student = () => {
-
-  const [selectFile, setSelectFile]=useState(null);
+  const [selectFile, setSelectFile] = useState(null);
   const [students, setStudent] = useState([]);
   const URL = "http://localhost:3000/students";
- // let headers = new Headers();
+  // let headers = new Headers();
 
-  const uploadFile=(e)=>{
+  const uploadFile = (e) => {
     setSelectFile(e);
-  }
+  };
 
-
-  const insertFile=()=>{
-    const f= new FormData();
+  const insertFile = () => {
+    const f = new FormData();
     for (let index = 0; index < selectFile.length; index++) {
-      f.append("doc", selectFile[index]);  
+      f.append("doc", selectFile[index]);
     }
     const requestOptions = {
-      mode: 'no-cors',
-      credentials: 'include',
-      headers:  {
-        'Access-Control-Allow-Origin': '*',
+      mode: "no-cors",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
       },
       method: "POST",
       body: f,
       redirect: "follow",
     };
-  
-    fetch("http://localhost:3000/students", requestOptions )
+
+    fetch("http://localhost:3000/students", requestOptions)
       .then((result) => console.log(result, "EXITTO AL SUBBIR"))
       .catch((error) => console.log("error", error));
-
-  }
+  };
 
   const columns = [
     { field: "address", headerName: "Dirección", width: 225 },
@@ -64,7 +68,7 @@ export const Student = () => {
             <GridToolbarDensitySelector />
             <GridToolbarExport />
           </Box>
-          </Box>
+        </Box>
       </GridToolbarContainer>
     );
   }
@@ -72,59 +76,65 @@ export const Student = () => {
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
-  method: "GET",
-  redirect: "follow",
-};
+    method: "GET",
+    redirect: "follow",
+  };
 
   useEffect(() => {
     fetch(URL, requestOptionsGet)
       .then((response) => response.json())
       .then((json) => setStudent(json));
   }, []);
-  console.log("STUDENTS:",students)
+  console.log("STUDENTS:", students);
 
   return (
     <>
-      <div>
-        <h1> Listado Estudiantes </h1>
-        <p>
-          Subir el litado de los docentes en formato .xlsx de la siguiente
-          manera:{" "}
-        </p>
-        <p> Dirección, Nombre, Apellido, Correo</p>
-        <p>Ejemplo:</p>
-        <p>Dirección, Nombre, Apellido, Correo</p>
-        <p>"Av. Eugenio Espejo","Juan","Perez", "juanperez@unl.edu.ec"</p>
-        <p></p>
-        <p> Archivo excel CHD</p>
-      </div>
-      <div className="scheduleUploadFile">
-        <Input
-          id="contained-button-file"
-          multiple
-          type="file"
-          onChange={(e)=>uploadFile(e.target.files)}
-        />
-        <Button variant="contained" component="span"
-        onClick={()=>insertFile()}>
-          Subir Archivo
-        </Button>
-      </div>
+      <center>
+        <div>
+          <h1> Listado Estudiantes </h1>
+          <p>
+            Subir el litado de los docentes en formato .xlsx de la siguiente
+            manera:{" "}
+          </p>
+          <p> Dirección, Nombre, Apellido, Correo</p>
+          <p>Ejemplo:</p>
+          <p>Dirección, Nombre, Apellido, Correo</p>
+          <p>"Av. Eugenio Espejo","Juan","Perez", "juanperez@unl.edu.ec"</p>
+          <p></p>
+          <p> Archivo excel CHD</p>
+        </div>
+        <div className="scheduleUploadFile">
+          <Input
+            id="contained-button-file"
+            multiple
+            type="file"
+            onChange={(e) => uploadFile(e.target.files)}
+          />
+          <Button
+            variant="contained"
+            component="span"
+            onClick={() => insertFile()}
+          >
+            Subir Archivo
+          </Button>
+        </div>
 
-      <div style={{ height: 600, width: "55%" }}>
-        <h1>Contenido del archivo</h1>
-        <DataGrid
-          rows={students}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection
-          components={{
-            Toolbar: CustomToolbar,
-          }
-          }
-        />
-      </div>
+        <div style={{ paddingTop: "3%" }}></div>
+
+        <div style={{ height: 600, width: "55%" }}>
+          <h1>Contenido del archivo</h1>
+          <DataGrid
+            rows={students}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            components={{
+              Toolbar: CustomToolbar,
+            }}
+          />
+        </div>
+      </center>
     </>
   );
 };

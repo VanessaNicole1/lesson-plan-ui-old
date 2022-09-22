@@ -1,81 +1,107 @@
 import * as React from "react";
-import MUIDataTable from "mui-datatables";
+import {
+  DataGrid,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+} from "@mui/x-data-grid";
 import { HeaderUNL } from "../../headers/headerUNL";
-import { Grid, IconButton } from "@mui/material";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { Avatar, Box, Grid } from "@mui/material";
+import { useState } from "react";
+import { useEffect } from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const TeacherTable = () => {
-  //1 - configuramos Los hooks
+  const [getTeachers, setTeachers] = useState([]);
+  const URL = "http://localhost:3000/teachers";
 
-  //2 - fcion para mostrar los datos con axios
+  const requestOptionsGet = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "GET",
+    redirect: "follow",
+  };
 
-  const data = [
-    {
-      id: 1,
-      address: "Av. 8 de Diciembre",
-      name: "Edison",
-      lastName: "Coronel",
-      email: "edisoncor@unl.edu.ec",
-      action: (
-        <IconButton aria-label="hola">
-          <ModeEditIcon color="primary" />
-        </IconButton>
-      ),
-    },
-    {
-      id: 2,
-      address: "Av. Eugenio Espejo",
-      name: "Valeria",
-      lastName: " Herrera Salazar",
-      email: "correo@unl.edu.ec",
-      action: (
-        <IconButton aria-label="hola">
-          <ModeEditIcon color="primary" />
-        </IconButton>
-      ),
-    },
-    {
-      id: 3,
-      address: "Av. UNiversitaria",
-      name: "Genoveva",
-      lastName: "Suing Alvito",
-      email: "correo2@unl.edu.ec",
-      action: (
-        <IconButton aria-label="hola">
-          <ModeEditIcon color="primary" />
-        </IconButton>
-      ),
-    },
-  ];
-
-  //3 - Definimos las columns
   const columns = [
+    { field: "identifier", headerName: "Identificador", width: 150 },
+    { field: "name", headerName: "Nombre", width: 150 },
+    { field: "lastName", headerName: "Apellido", width: 150 },
+    { field: "email", headerName: "Correo", width: 300 },
     {
-      name: "id",
-      label: "Nro",
-    },
-    {
-      name: "address",
-      label: "Direccion",
-    },
-    {
-      name: "name",
-      label: "Nombre",
-    },
-    {
-      name: "lastName",
-      label: "Apellido",
-    },
-    {
-      name: "email",
-      Label: "Correo",
-    },
-    {
-      name: "action",
-      Label: "Acción",
+      field: "action",
+      headerName: "Acciones",
+      width: 130,
+      sortable: false,
+      disableClickEventBubbling: true,
+      renderCell: () => {
+        return (
+          <>
+            <Avatar sx={{ m: 1, bgcolor: "info.main" }}>
+              <EditIcon />
+            </Avatar>
+            <Avatar sx={{ m: 1, bgcolor: "error.main" }}>
+              <DeleteIcon />
+            </Avatar>
+          </>
+        );
+      },
     },
   ];
-  //4 - renderizamos la datatable
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <Box
+          //height="65px"
+          width="100%"
+          display="flex"
+          flexDirection="row"
+          justifyContent="left"
+        >
+          <Box
+            width="70%"
+            display="flex"
+            justifyContent="flex-start"
+            //alignItems="center"
+          >
+            <GridToolbarColumnsButton />
+            <GridToolbarFilterButton />
+            <GridToolbarDensitySelector />
+            <GridToolbarExport />
+          </Box>
+
+          <Box
+            width="30%"
+            display="flex"
+            justifyContent="flex-end"
+            //alignItems="center"
+          >
+            
+          </Box>
+        </Box>
+      </GridToolbarContainer>
+    );
+  }
+
+  const data = [{
+    id: 1,
+    address: "Av. 8 de Diciembre",
+    name: "Edison",
+    lastName: "Coronel",
+    email: "edisoncor@unl.edu.ec",
+  }]
+
+  useEffect(() => {
+    fetch(URL, requestOptionsGet)
+      .then((response) => response.json())
+      .then((json) => setTeachers(json));
+  }, []);
+  console.log("TEACHERS:", getTeachers);
+  
   return (
     <>
       <Grid container>
@@ -83,10 +109,15 @@ export const TeacherTable = () => {
       </Grid>
 
       <Grid container justifyContent="center">
-        <MUIDataTable
-          title={"Tabla de Docentes"}
-          data={data}
+        <DataGrid
+          rows={data}
           columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection
+          components={{
+            Toolbar: CustomToolbar,
+          }}
         />
       </Grid>
     </>
