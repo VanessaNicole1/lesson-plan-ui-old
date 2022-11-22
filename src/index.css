@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   background-color: white;
   margin: 0;
@@ -42,4 +46,3 @@ code {
     flex-direction: column;
   }
 }
-

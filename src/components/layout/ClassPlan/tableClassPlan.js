@@ -13,10 +13,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ClasSPlan } from "./clasSPlan";
+import { ModalClassPlan } from "./modalClassPlan";
+import { useState } from "react";
 
 export const TableClassPlan = () => {
-  const [lgShow, setLgShow] = React.useState(false);
+  const [lgShowPost, setLgShowPost] = useState(false);
+  const [lgShowEdit, setLgShowEdit] = useState(false);
   
   function CustomToolbar() {
     return (
@@ -47,7 +49,7 @@ export const TableClassPlan = () => {
             //alignItems="center"
           >
             <Avatar sx={{ m: 1, bgcolor: "info.main" }}>
-              <AddIcon onClick={() => setLgShow(true)} />
+              <AddIcon onClick={() => setLgShowPost(true)} />
             </Avatar>
           </Box>
         </Box>
@@ -129,7 +131,7 @@ export const TableClassPlan = () => {
         return (
           <>
             <Avatar sx={{ m: 1, bgcolor: "info.main" }}>
-              <EditIcon />
+              <EditIcon onClick={() => setLgShowEdit(true)}/>
             </Avatar>
             <Avatar sx={{ m: 1, bgcolor: "error.main" }}>
               <DeleteIcon />
@@ -140,12 +142,12 @@ export const TableClassPlan = () => {
     },
   ];
 
-  const ModalContent =()=>{
+  const ModalContentPost =()=>{
     return(
       <Modal
         size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
+        show={lgShowPost}
+        onHide={() => setLgShowPost(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
@@ -153,7 +155,25 @@ export const TableClassPlan = () => {
             Plan de Clases
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body> <ClasSPlan/> </Modal.Body>
+        <Modal.Body> <ModalClassPlan/> </Modal.Body>
+      </Modal>
+    );
+  }
+
+  const ModalContentEdit =()=>{
+    return(
+      <Modal
+        size="lg"
+        show={lgShowEdit}
+        onHide={() => setLgShowEdit(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Plan de Clases
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body> <ModalClassPlan/> </Modal.Body>
       </Modal>
     );
   }
@@ -172,7 +192,8 @@ export const TableClassPlan = () => {
           }}
         />
       </div>
-      {lgShow ?  <ModalContent/> : null}
+      {lgShowPost ?  <ModalContentPost/> : null}
+      {lgShowEdit ?  <ModalContentEdit/> : null}
     </>
   );
 };

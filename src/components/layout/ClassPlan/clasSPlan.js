@@ -32,8 +32,7 @@ const initialFieldValues = {
 
 export const ClasSPlan = ({ change }) => {
   const [values, setValues] = useState(initialFieldValues);
-  //const [errors, setErrors] = useState();
-  //const classes = useStyles();
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
